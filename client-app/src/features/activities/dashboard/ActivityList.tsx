@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
-import { Header, Item, Segment } from 'semantic-ui-react';
+import { Fragment } from 'react'
+import { Header } from 'semantic-ui-react';
 import { useStore } from '../../../app/store/store';
 import { observer } from 'mobx-react-lite';
 import ActivityListItem from './ActivityListItem';
-import { group } from 'console';
 
 
 export default observer( function ActivityList() {
