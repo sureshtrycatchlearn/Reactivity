@@ -8,10 +8,11 @@ import LoadingComponents from "../../../app/layout/LoadingComponents";
 
 export default observer( function ActivityDashBoard(){
     const {activityStore} = useStore();
+    const {loadActivities, activityRegistry} = activityStore;
 
     useEffect (()=>{
-      activityStore.loadActivities();
-    },[activityStore])
+      if(activityRegistry.size <=1) loadActivities();
+    },[loadActivities, activityRegistry.size])
   
   
     if(activityStore.loadingInitial) return <LoadingComponents content='Loading App....'/>
