@@ -14,60 +14,59 @@ export default class ActivityStore{
         makeAutoObservable(this)
     }
 
-    get ActivitiesByDate(){
-        return Array.from(this.activityRegistry.values()).sort((a,b)=> Date.parse(a.date)-Date.parse(b.date))
+    get activitiesByDate() {
+        return Array.from(this.activityRegistry.values()).sort((a, b) =>
+        a.date!.getTime() - b.date!.getTime());
     }
 
     get groupedActivities(){
         return Object.entries(
-            this.ActivitiesByDate.reduce((activities, activity)=>{
-                const date = activity.date;
-                activities[date]=activities[date] ? [...activities[date], activity]:[activity];
+            this.activitiesByDate.reduce((activities, activity) => {
+                const date = activity.date!.toISOString().split('T')[0];
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity];
                 return activities;
-            },{} as {[key:string]:Activity[]})
+            }, {} as {[key: string]: Activity[]})
         )
     }
 
     loadActivities = async () => {
-        this.setLoadingInitial(true);   
+        this.setLoadingInitial(true);
         try {
             const activities = await agent.Activities.list();
-                activities.forEach(activity=> {
-                    this.setActivity(activity)
-                  })
-                  this.setLoadingInitial(false); 
+            activities.forEach(activity => {
+                this.setActivity(activity);
+            })
+            this.setLoadingInitial(false);
         } catch (error) {
-            console.log(error)
-                this.setLoadingInitial(false);            
+            console.log(error);
+            this.setLoadingInitial(false);
         }
     }
 
 
-    loadActivity = async (id:string) => {
+    loadActivity = async (id: string) => {
         let activity = this.getActivity(id);
         if (activity) {
-            this.selectedActivity=activity;
+            this.selectedActivity = activity;
             return activity;
         }
-        else{
+        else {
             this.setLoadingInitial(true);
             try {
                 activity = await agent.Activities.details(id);
-                this.setActivity(activity)
-                runInAction(()=>this.selectedActivity=activity);
+                this.setActivity(activity);
+                runInAction(() => this.selectedActivity = activity);
                 this.setLoadingInitial(false);
                 return activity;
             } catch (error) {
                 console.log(error);
                 this.setLoadingInitial(false);
-
-                
             }
         }
     }
 
     private setActivity = (activity:Activity) =>{
-        activity.date=activity.date.split('T')[0];
+        activity.date = new Date(activity.date!);
         this.activityRegistry.set(activity.id, activity);
     }
 
@@ -102,6 +101,7 @@ export default class ActivityStore{
     updateActivity = async(activity:Activity)=>{
         this.loading=true;
         try {
+            activity.date = new Date(activity.date!);
             await agent.Activities.update(activity);
             runInAction(()=>{
                 this.activityRegistry.set(activity.id, activity)
