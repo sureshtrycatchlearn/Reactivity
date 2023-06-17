@@ -4,6 +4,7 @@ import { error } from 'console';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../store/store';
+import { User, UserFormValues } from '../models/user';
 
 const sleep = (delay:number)=>{
     return new Promise((resolve)=>{
@@ -69,8 +70,17 @@ const Activities = {
     delete: (id:string)=>requests.del<void>(`/activities/${id}`)
 }
 
+const Accounts={
+    current:()=>requests.get<User>('/account'),
+    login:(user:UserFormValues)=>requests.post<User>('/account/login', user),
+    register:(user:UserFormValues)=>requests.post<User>('/account/register', user)
+
+}
+
+
 const agent={
-    Activities
+    Activities,
+    Accounts
 }
 
 export default agent;
