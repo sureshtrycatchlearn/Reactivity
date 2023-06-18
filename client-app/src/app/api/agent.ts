@@ -5,12 +5,21 @@ import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../store/store';
 import { User, UserFormValues } from '../models/user';
+import { config } from 'process';
 
 const sleep = (delay:number)=>{
     return new Promise((resolve)=>{
         setTimeout(resolve,delay)
     })
 }
+
+
+
+axios.interceptors.request.use(config=>{
+    const token = store.commonStore.token;
+    if(token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
 
 axios.interceptors.response.use(async response => {
     await sleep(1000)
