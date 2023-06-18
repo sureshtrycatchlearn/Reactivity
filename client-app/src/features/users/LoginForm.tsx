@@ -1,10 +1,8 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { values } from "mobx";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { Button, Header, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../app/store/store";
-import { error } from "console";
 
 export default observer( function LoginForm(){
     const {userStore}=useStore();
