@@ -2,9 +2,9 @@ using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
-using Application.Activities.Core;
 using Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Application.Core;
 
 namespace Application.Activities
 {
@@ -43,6 +43,8 @@ namespace Application.Activities
                     IsHost = true
                 };
 
+                request.Activity.Attendees.Add(attendee);
+                
                 _context.Activities.Add(request.Activity);
 
                 var result= await _context.SaveChangesAsync()>0;

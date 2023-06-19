@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Net;
 using System.Threading.Tasks;
-using Application.Activities.Core;
+using Application.Core;
 
 namespace API.Middleware
 {

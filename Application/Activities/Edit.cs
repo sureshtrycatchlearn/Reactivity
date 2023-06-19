@@ -1,4 +1,4 @@
-using Application.Activities.Core;
+using Application.Core;
 using AutoMapper;
 using Domain;
 using FluentValidation;

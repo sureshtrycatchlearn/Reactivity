@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Activities;
-using Application.Activities.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -11,6 +10,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Application.Interfaces;
 using Infrastructure.Security;
+using Application.Core;
 
 namespace API.Extensions
 {
