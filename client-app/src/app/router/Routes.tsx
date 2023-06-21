@@ -7,6 +7,7 @@ import TestErrors from "../../features/errors/Testerrors";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import LoginForm from "../../features/users/LoginForm";
+import ProfilePage from "../../features/profiles/ProfilePage";
 
  export const routes:RouteObject[]=[
     {
@@ -16,6 +17,7 @@ import LoginForm from "../../features/users/LoginForm";
             {path:'activities', element:<ActivityDashboard/>},
             {path:'activities/:id', element:<ActivityDetails/>},
             {path:'createActivity', element:<ActivityForm key='create'/>},
+            {path:'profiles/:username', element:<ProfilePage/>},
             {path:'manage/:id', element:<ActivityForm key='manage'/>},
             {path:'login', element:<LoginForm/>},
             {path:'errors', element:<TestErrors/>},

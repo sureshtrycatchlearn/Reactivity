@@ -6,6 +6,7 @@ import { router } from '../router/Routes';
 import { store } from '../store/store';
 import { User, UserFormValues } from '../models/user';
 import { config } from 'process';
+import { Profile } from '../models/profile';
 
 const sleep = (delay:number)=>{
     return new Promise((resolve)=>{
@@ -88,10 +89,14 @@ const Accounts={
 
 }
 
+const Profiles ={
+    get:(username:string)=>requests.get<Profile>(`/profiles/${username}`)
+}
 
 const agent={
     Activities,
-    Accounts
+    Accounts,
+    Profiles
 }
 
 export default agent;
