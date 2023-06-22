@@ -9,23 +9,26 @@ import { useEffect } from "react";
 import LoadingComponents from "../../app/layout/LoadingComponents";
 import ProfileHeader from "./ProfileHeader";
 
-export default observer (function ProfilePage(){
-    const {username} = useParams<{username:string}>();
-    const {profileStore} = useStore();
-    const {loadProfile, loadingProfile, profile} =profileStore
-    
-    useEffect(()=>{
-        if(username)loadProfile(username);
-    },[loadProfile, username])
+export default observer(function ProfilePage() {
+    const { username } = useParams<{ username: string }>();
+    const { profileStore } = useStore();
+    const { loadProfile, loadingProfile, profile } = profileStore
 
-    if (loadingProfile) return <LoadingComponents content='Loading Profile.....'/>
+    useEffect(() => {
+        if (username) loadProfile(username);
+    }, [loadProfile, username])
 
-    return(
+    if (loadingProfile) return <LoadingComponents content='Loading Profile.....' />
+
+    return (
         <Grid>
             <Grid.Column width={16}>
                 {profile &&
-                <ProfileHeader profile={profile}/>}
-                <ProfileContent/>
+                    <>
+                        <ProfileHeader profile={profile} />
+                        <ProfileContent profile={profile} />
+                    </>}
+
             </Grid.Column>
         </Grid>
     )

@@ -20,7 +20,7 @@ export default observer( function ActivityDashBoard(){
 
     return(
         <Grid >
-            <Grid.Column width='10' >    
+            <Grid.Column width='12' >    
                 <ActivityList/>
             </Grid.Column>
             <Grid.Column width='4'>
