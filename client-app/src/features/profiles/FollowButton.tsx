@@ -18,7 +18,7 @@ export default observer(function FollwButton({ profile }: Props) {
     function handleFollow(e:SyntheticEvent, username:string)
     {
         e.preventDefault();
-        profile.following ? updateFollowing(username, false):updateFollowing(username, true);
+        profile.following ? updateFollowing(username, false) : updateFollowing(username, true);
     }
 
     return (

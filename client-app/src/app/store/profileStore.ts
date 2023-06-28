@@ -10,7 +10,7 @@ export default class profileStore {
     loading = false;
     followings : Profile[]=[];
     loadingFollowings:boolean = false;
-    activeTab=0;
+    activeTab:number=0;
 
     constructor() {
         makeAutoObservable(this);
@@ -136,8 +136,7 @@ export default class profileStore {
                     following? this.profile.followersCount++ : this.profile.followersCount--;
                     this.profile.following = !this.profile.following;
                }
-               if(this.profile && this.profile.username === store.userStore.user?.username)
-               {
+               if(this.profile && this.profile.username === store.userStore.user?.username){
                 following ? this.profile.followingCount++: this.profile.followingCount--;
                }
 

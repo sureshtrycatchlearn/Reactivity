@@ -18,7 +18,8 @@ export default observer (function ProfileFollowings(){
                         content={activeTab===3 ?`People Following ${profile?.displayName}`:`People ${profile?.displayName} is Following`}/>
                 </Grid.Column >
                 <Grid.Column width={16}>
-                    <Card.Group itemsPerRow={4}>
+                    <Card.Group itemsPerRow='5'>
+                    <h1>Suresh{profile?.username} {profile?.followersCount} {profile?.followingCount}</h1>
                         {followings.map(profile=>(
                             <ProfileCard key={profile.username} profile={profile}/>
                         ))}
