@@ -18,7 +18,14 @@ export default class ActivityStore{
 
     constructor() {
         makeAutoObservable(this)
-        reaction(()=>)
+        reaction(
+            ()=>this.predicate.keys(),
+            ()=> {
+                this.pagingParams = new PagingParms();
+                this.activityRegistry.clear();
+                this.loadActivities();
+            }
+        )
     }
 
     setPagingParams=(pagingParams:PagingParms)=>{
@@ -45,10 +52,8 @@ export default class ActivityStore{
             this.predicate.set('isHost', true);
             break;
             case 'startDate':
-            resetpredicate();
             this.predicate.delete('startDate');
-            this.predicate.set('startDate', true);
-            break;
+            this.predicate.set('startDate', value);
         }
     }
 
@@ -58,7 +63,7 @@ export default class ActivityStore{
         params.append('pageSize', this.pagingParams.pageSize.toString());
         this.predicate.forEach((value, key)=>{
             if(key==='startDate'){
-                params.append(key, (value).toISOString())
+                params.append(key, (value as Date).toISOString())
             } else {
                 params.append(key, value);
             }
