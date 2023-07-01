@@ -5,7 +5,6 @@ import { useStore } from "../../../app/store/store";
 
 export default observer(function ActivityFilters(){
     const {activityStore:{predicate,setPredicate}} = useStore();
-    console.log(setPredicate)
     return(
         <>
         <Menu vertical size='large' style={{width:'100%', marginTop:25}}>
